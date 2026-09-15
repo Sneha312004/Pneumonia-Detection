@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" />
+
+<title>Chest X-Ray Pneumonia Detection</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<!-- Google Font (optional) -->
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet" />
+
+
+
+<!-- External CSS -->
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+
+</head><body class="simple-body"><div class="simple-container">
+
+    <h1 class="main-title">Chest X-Ray Pneumonia Detection</h1>
+
+
+
+    <form method="POST" enctype="multipart/form-data" class="upload-form">
+
+        <input type="file" name="file" id="file-upload" class="file-input" />
+
+        <button type="submit" class="upload-button">Upload &amp; Predict</button>
+
+    </form>
+
+
+
+    <h2 class="section-title">Your Upload</h2>
+
+    <div class="image-box">
+
+        {% if filename %}
+
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}"
+
+                 alt="Uploaded X-ray" class="xray-image" />
+
+        {% else %}
+
+            <p class="placeholder-text">No image uploaded yet.</p>
+
+        {% endif %}
+
+    </div>
+
+
+
+   {% if prediction %}
+
+<div class="prediction-bar
+
+    {% if risk_tier == 'green' %} prediction-green
+
+    {% elif risk_tier == 'yellow' %} prediction-yellow
+
+    {% else %} prediction-red {% endif %}">
+
+    <strong>{{ prediction }}</strong> (Confidence: {{ confidence }})
+
+</div>
+
+<div class="alert-bar
+
+    {% if risk_tier == 'green' %} alert-green
+
+    {% elif risk_tier == 'yellow' %} alert-yellow
+
+    {% else %} alert-red {% endif %}">
+
+    {{ message }}
+
+</div>
+
+{% else %}
+
+<div class="prediction-bar empty">
+
+    Prediction will appear here after you upload an image.
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body></html>  this is the front end HTML Code
