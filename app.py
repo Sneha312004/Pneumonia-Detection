@@ -80,8 +80,8 @@ def display_image(filename):
 
 return redirect(url_for('static', filename=f'uploads/{filename}'))
 
-if name == 'main':
-
-app.run(debug=True)
+if name == '__main__':
+port = int(os.environ.get('PORT' , 5000))
+app.run(host='0.0.0.0',port=port, debug=False)
 
 this is the flask app created for the model
